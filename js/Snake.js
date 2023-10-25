@@ -6,11 +6,11 @@ class Snake {
         this.body = [
             {
                 x: 1,
-                Y: 1,
+                y: 1,
             },
             {
                 x: 1,
-                Y: 2,
+                y: 2,
             }
         ];
 
