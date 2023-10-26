@@ -45,4 +45,41 @@ class Snake {
         this.body.unshift(newHeadCoords);
         this.body.pop();
     }
+
+    /**
+     * Изменение направления движения.
+     * @param {string} newDirection - новое направление 
+     * @throws {Error} - при передаче некорректного направления 
+     */
+    changeDirection(newDirection) {
+        if (!this.possibleDirections.includes(newDirection)) {
+            throw new Error('Передано неверное направление. Вы передали: ' + newDirection);
+        }
+        // не передали ли противоположное направление
+        if (this.isPassedOppositeDirection(newDirection)) {
+            return;
+        }
+        this.direction = newDirection;
+    }
+
+    /**
+     * Проверка, является ли переданное направление противоположным тому, куда сейчас движется змейка.
+     * @param {string} newDirection - новое направление
+     * @returns {boolean} - true, если новое направление противоположно текущему
+     */
+    isPassedOppositeDirection(newDirection) {
+        if (this.direction == 'down' && newDirection == 'up') {
+            return true;
+        }
+        if (this.direction == 'up' && newDirection == 'down') {
+            return true;
+        }
+        if (this.direction == 'left' && newDirection == 'right') {
+            return true;
+        }
+        if (this.direction == 'right' && newDirection == 'left') {
+            return true;
+        }
+        return false;
+    }
 }

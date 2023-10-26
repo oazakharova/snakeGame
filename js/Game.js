@@ -20,7 +20,7 @@ class Game {
         let game = this;
         let newStartFn = this.start.bind(game); // bind фиксирует/привязывает this к функции - нужно потому, что функцию вызывают кнопки, а значит без привязки thisом будут они, а не игра
         this.menu.addButtonsClickListeners(newStartFn, this.pause.bind(this)); //аналоги
-        //document.addEventListener('keydown', this.)
+        document.addEventListener('keydown', this.pressKeyHandler.bind(this));
     }
 
     start() {
@@ -49,5 +49,26 @@ class Game {
         this.board.clearBoard(); // очистка поля
         this.food.setFood(); // возврат еды
         this.board.renderSnake(); // отрисовка змейки с новыми координатами
+    }
+
+    /**
+     * В зависимости от нажатой кнопки (вверх, вниз, влево, вправо) будет вызываться соответствующий метод.
+     * @param {KeyboardEvent} event 
+     */
+    pressKeyHandler(event) {
+        switch (event.key) {
+            case "ArrowUp":
+                this.snake.changeDirection('up');
+                break;
+            case "ArrowDown":
+                this.snake.changeDirection('down');
+                break;
+            case "ArrowLeft":
+                this.snake.changeDirection('left');
+                break;
+            case "ArrowRight":
+                this.snake.changeDirection('right');
+                break;
+        }
     }
 }
