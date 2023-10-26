@@ -1,7 +1,7 @@
 class Board {
     // игровое поле
     constructor() {
-        this.boardEL = document.getElementById('game');
+        this.boardEl = document.getElementById('game');
     }
 
     /**
@@ -18,10 +18,10 @@ class Board {
      * Отрисовка игрового поля
      */
     renderBoard() {
-        this.boardEL.innerHTML = '';
+        this.boardEl.innerHTML = '';
         for (let row = 0; row < this.settings.rowsCount; row++) {
             let tr = document.createElement('tr');
-            this.boardEL.appendChild(tr);
+            this.boardEl.appendChild(tr);
 
             for (let col = 0; col < this.settings.colsCount; col++) {
                 let td = document.createElement('td');
@@ -38,7 +38,7 @@ class Board {
         if (snakeBodyElems) {
             snakeBodyElems.forEach(function (tdEl) {
                 tdEl.classList.add('snakeBody');
-            });
+            })
         }
     }
 
@@ -66,7 +66,7 @@ class Board {
      * @returns {HTMLTableCellElement} - тег td
      */
     getCellEl(x, y) {
-        return this.boardEL.querySelector(`tr:nth-child(${y}) td:nth-child(${x})`);
+        return this.boardEl.querySelector(`tr:nth-child(${y}) td:nth-child(${x})`);
     }
 
     /**
@@ -78,5 +78,12 @@ class Board {
     renderFood(coords) {
         const foodCell = this.getCellEl(coords.x, coords.y);
         foodCell.classList.add('food');
+    }
+
+    clearBoard() {
+        const tdElems = document.querySelectorAll('td');
+        tdElems.forEach(function (td) {
+            td.className = "";
+        });
     }
 }

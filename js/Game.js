@@ -45,7 +45,9 @@ class Game {
      * 4. отрисовка змейки и еды
      */
     doTick() {
-        console.log('tick');
-        console.log(this);
+        this.snake.performStep(); // перемещение змейки
+        this.board.clearBoard(); // очистка поля
+        this.food.setFood(); // возврат еды
+        this.board.renderSnake(); // отрисовка змейки с новыми координатами
     }
 }
