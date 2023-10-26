@@ -17,15 +17,35 @@ class Game {
      * Назначение обработчиков на кнопки Старт и Пауза
      */
     run() {
-        this.menu.addButtonsClickListeners(this.start, this.pause)
+        let game = this;
+        let newStartFn = this.start.bind(game); // bind фиксирует/привязывает this к функции - нужно потому, что функцию вызывают кнопки, а значит без привязки thisом будут они, а не игра
+        this.menu.addButtonsClickListeners(newStartFn, this.pause.bind(this)); //аналоги
         //document.addEventListener('keydown', this.)
     }
 
     start() {
-        console.log('start');
+        if (this.status.isPaused()) {
+            this.status.setPlaying();
+            this.tickIdentifier = setInterval(this.doTick.bind(this), 1000 / this.settings.speed);
+        }
     }
 
     pause() {
-        console.log('pause');
+        if (this.status.isPlaying()) {
+            this.status.setPaused();
+            clearInterval(this.tickIdentifier); // прекратить вызовы по переданному идентификатору
+        }
+    }
+
+    /**
+     * Ежесекундно:
+     * 1. перемещение змейки
+     * 2. проверка статуса игры (выиграна/проиграна)
+     * 3. увеличение размера змейки при поглащении еды
+     * 4. отрисовка змейки и еды
+     */
+    doTick() {
+        console.log('tick');
+        console.log(this);
     }
 }
