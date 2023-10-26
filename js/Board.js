@@ -68,4 +68,15 @@ class Board {
     getCellEl(x, y) {
         return this.boardEL.querySelector(`tr:nth-child(${y}) td:nth-child(${x})`);
     }
+
+    /**
+     * Отрисовка еды на игровом поле
+     * @param {Food} coords - будущее расположение еды на поле
+     * @param {number} coords.x - координата х
+     * @param {number} coords.y - координата у
+     */
+    renderFood(coords) {
+        const foodCell = this.getCellEl(coords.x, coords.y);
+        foodCell.classList.add('food');
+    }
 }
