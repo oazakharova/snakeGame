@@ -49,6 +49,9 @@ class Game {
     doTick() {
         this.snake.performStep(); // перемещение змейки
         this.score.setCurrent(this.snake.body.length);
+        if (this.isSnakeSteppedOntoItself()) {
+            return;
+        }
         /**if (this.isGameLost()) {
             return;
         } // проверка, не проиграна ли игра*/ //устаревшая проверка, не нашла ли змейка на стену, так как теперь она это умеет
@@ -123,5 +126,33 @@ class Game {
      */
     setMessage(text) {
         this.messageEl.innerText = text;
+    }
+
+    /**
+     * Проверка, не съела ли змейка сама себя - если змейка наступила, то будут совпадающие координаты тела с головой
+     * @returns {boolean}
+     */
+    isSnakeSteppedOntoItself() {
+        let cellArr = this.snake.body.map(function (cellCoords) {
+            return cellCoords.x.toString() + cellCoords.y.toString();
+        });
+        let head = cellArr.shift();
+        if (cellArr.includes(head)) {
+            clearInterval(this.tickIdentifier);
+            this.setMessage('Вы проиграли');
+            return true;
+        }
+        return false;
+
+        /* map:
+        [
+            {x: 1, y: 1}
+            {x: 1, y: 2}
+            {x: 1, y: 3}
+        ]
+        [
+            "11", "12", "13"
+        ]
+        */
     }
 }
