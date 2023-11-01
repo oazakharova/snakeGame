@@ -8,7 +8,8 @@ window.addEventListener('load', () => {
     const game = new Game();
     const score = new Score();
 
-    settings.init({ speed: 5, winLength: 25 });
+    settings.init({ speed: 5, winLength: 15 });
+    snake.init(settings);
     board.init(settings, snake); // полю нужно передать настройки поля для отрисовки и змейку 
     food.init(settings, snake, board);
     game.init(settings, status, board, snake, menu, food, score);
