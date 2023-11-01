@@ -58,7 +58,7 @@ class Game {
         if (this.isGameWon()) {
             return
         }
-        if (this.board.isHeadOnFood()) {
+        if (this.board.didSnakeEatFood()) {
             this.snake.increaseBody();
             this.food.setNewFood();
         } //если еда съедена, увеличить тело и установить новую еду

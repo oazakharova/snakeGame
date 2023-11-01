@@ -18,7 +18,6 @@ class Board {
      * Отрисовка игрового поля
      */
     renderBoard() {
-        this.boardEl.innerHTML = '';
         for (let row = 0; row < this.settings.rowsCount; row++) {
             let tr = document.createElement('tr');
             this.boardEl.appendChild(tr);
@@ -35,28 +34,29 @@ class Board {
      */
     renderSnake() {
         const snakeBodyElems = this.getSnakeBodyElems(this.snake.body);
-        if (snakeBodyElems) {
-            snakeBodyElems.forEach(function (tdEl) {
-                tdEl.classList.add('snakeBody');
-            })
-        }
+
+        snakeBodyElems.forEach(function (tdEl) {
+            tdEl.classList.add('snakeBody');
+        });
     }
 
     /**
      * Получение тела змейки = набора тегов td
-     * @param {array} bodyCoords - массив объектов координат 
-     * @returns {HTMLTableCellElement[] | null} - возвращает набор тегов td, если координаты были переданы
+     * @param {Array} bodyCoords массив объектов с координатами
+     * @throws {Error} если координаты не будут переданы, то будет выброшена ошибка
+     * @returns {HTMLTableCellElement[]}
      */
     getSnakeBodyElems(bodyCoords) {
-        if (bodyCoords.length > 0) {
-            let bodyElems = [];
-            for (let value of bodyCoords) {
-                let elem = this.getCellEl(value.x, value.y);
-                bodyElems.push(elem);
-            }
-            return bodyElems;
+        if (bodyCoords.length === 0) {
+            throw new Error("Не переданы координаты тела змейки.");
         }
-        return null;
+
+        let bodyElems = [];
+        for (let coordinate of bodyCoords) {
+            let td = this.getCellEl(coordinate.x, coordinate.y);
+            bodyElems.push(td);
+        }
+        return bodyElems;
     }
 
     /**
@@ -91,7 +91,7 @@ class Board {
      * Проверка, съедена ли еда
      * @returns {boolean} true, если змейка находится на еде, иначе false
      */
-    isHeadOnFood() {
+    didSnakeEatFood() {
         return this.boardEl.querySelector('.food').classList.contains('snakeBody');
     }
 
