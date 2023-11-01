@@ -4,19 +4,21 @@ class Game {
         this.messageEl = document.getElementById('message');
     }
 
-    init(settings, status, board, snake, menu, food) {
+    init(settings, status, board, snake, menu, food, score) {
         this.settings = settings;
         this.status = status;
         this.board = board;
         this.snake = snake;
         this.menu = menu;
         this.food = food;
+        this.score = score;
     }
 
     /**
      * Назначение обработчиков на кнопки Старт и Пауза
      */
     run() {
+        this.score.setToWin(this.settings.winLength);
         let game = this;
         let newStartFn = this.start.bind(game); // bind фиксирует/привязывает this к функции - нужно потому, что функцию вызывают кнопки, а значит без привязки thisом будут они, а не игра
         this.menu.addButtonsClickListeners(newStartFn, this.pause.bind(this)); //аналоги
@@ -46,6 +48,7 @@ class Game {
      */
     doTick() {
         this.snake.performStep(); // перемещение змейки
+        this.score.setCurrent(this.snake.body.length);
         if (this.isGameLost()) {
             return;
         } // проверка, не проиграна ли игра

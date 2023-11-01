@@ -6,11 +6,13 @@ window.addEventListener('load', () => {
     const menu = new Menu();
     const food = new Food();
     const game = new Game();
+    const score = new Score();
 
-    settings.init({ speed: 5, winLength: 5 });
+    settings.init({ speed: 5, winLength: 25 });
     board.init(settings, snake); // полю нужно передать настройки поля для отрисовки и змейку 
     food.init(settings, snake, board);
-    game.init(settings, status, board, snake, menu, food);
+    game.init(settings, status, board, snake, menu, food, score);
+    score.init(settings);
 
     board.renderBoard();
     board.renderSnake();

@@ -46,3 +46,20 @@ td {
   color: orange;
   font-size: 24px;
 }
+
+.score {
+  color: white;
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+.current {
+  font-weight: bold;
+  color: orange;
+}
+
+.toWin {
+  font-size: 1.5em;
+  color: #007b32;
+  font-weight: bold;
+}
