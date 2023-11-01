@@ -46,6 +46,9 @@ class Game {
      */
     doTick() {
         this.snake.performStep(); // перемещение змейки
+        if (this.isGameLost()) {
+            return;
+        } // проверка, не проиграна ли игра
         if (this.board.isHeadOnFood()) {
             this.snake.increaseBody();
             this.food.setNewFood();
@@ -74,5 +77,28 @@ class Game {
                 this.snake.changeDirection('right');
                 break;
         }
+    }
+
+    /**
+    * Проверка, проиграна ли игра, 
+    * остановка игры в случае проигрыша, 
+    * вывод сообщения о проигрыше.
+    * @returns {boolean} если шаг в стену - true, иначе false.
+    */
+    isGameLost() {
+        if (this.board.isNextStepToWall(this.snake.body[0])) {
+            clearInterval(this.tickIdentifier);
+            this.setMessage('Вы проиграли');
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Вывод сообщения на странице.
+     * @param {string} text 
+     */
+    setMessage(text) {
+        this.messageEl.innerText = text;
     }
 }

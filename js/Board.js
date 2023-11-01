@@ -94,4 +94,16 @@ class Board {
     isHeadOnFood() {
         return this.boardEl.querySelector('.food').classList.contains('snakeBody');
     }
+
+    /**
+     * Является ли следующий шаг шагом в стену.
+     * @param {Object} nextCellCoords - координаты ячейки, куда змейка собирается сделать шаг.
+     * @param {number} nextCellCoords.x
+     * @param {number} nextCellCoords.y
+     * @returns {boolean}
+     */
+    isNextStepToWall(nextCellCoords) {
+        let nextCell = this.getCellEl(nextCellCoords.x, nextCellCoords.y);
+        return nextCell === null;
+    }
 }
