@@ -46,6 +46,10 @@ class Game {
      */
     doTick() {
         this.snake.performStep(); // перемещение змейки
+        if (this.board.isHeadOnFood()) {
+            this.snake.increaseBody();
+            this.food.setNewFood();
+        } //если еда съедена, увеличить тело и установить новую еду
         this.board.clearBoard(); // очистка поля
         this.food.setFood(); // возврат еды
         this.board.renderSnake(); // отрисовка змейки с новыми координатами
