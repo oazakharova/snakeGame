@@ -49,6 +49,9 @@ class Game {
         if (this.isGameLost()) {
             return;
         } // проверка, не проиграна ли игра
+        if (this.isGameWon()) {
+            return
+        }
         if (this.board.isHeadOnFood()) {
             this.snake.increaseBody();
             this.food.setNewFood();
@@ -89,6 +92,21 @@ class Game {
         if (this.board.isNextStepToWall(this.snake.body[0])) {
             clearInterval(this.tickIdentifier);
             this.setMessage('Вы проиграли');
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Проверка, выиграна ли игра, 
+     * останавовка игры,
+     * вывод сообщения о выигрыше.
+     * @returns {boolean} если длина змейки достигла длины, нужной для победы, - true, иначе false.
+     */
+    isGameWon() {
+        if (this.snake.body.length == this.settings.winLength) {
+            clearInterval(this.tickIdentifier);
+            this.setMessage('Вы выиграли');
             return true;
         }
         return false;
