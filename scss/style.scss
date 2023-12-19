@@ -1,67 +1,70 @@
 @import "_variables.scss";
 
 body {
-    background: $backgroundColor;
+  background: $backgroundColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
-    width: 150px;
-    padding: 15px;
-    margin: 10px;
-    color: white;
-    background: $backgroundColorBtn;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  width: 150px;
+  padding: 15px;
+  margin: 10px;
+  color: white;
+  background: $backgroundColorBtn;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 button:hover {
-    background: $backgroundColorBtnHover;
+  background: $backgroundColorBtnHover;
 }
 
 button:active {
-    background: $backgroundColorBtnActive;
-    color: black;
+  background: $backgroundColorBtnActive;
+  color: black;
 }
 
 #game {
-    border-collapse: collapse;
-    margin: 30px 0;
-    min-height: 484px;
+  border-collapse: collapse;
+  margin: 30px 0;
+  min-height: 484px;
 }
 
 td {
-    width: 20px;
-    height: 20px;
-    border: 1px solid #eee;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #eee;
 }
 
 .food {
-    background: $backgroundFood;
+  background: $backgroundFood;
 }
 
 .snakeBody {
-    background: orange;
+  background: orange;
 }
 
 #message {
-    color: orange;
-    font-size: 24px;
+  color: orange;
+  font-size: 24px;
 }
 
 .score {
-    color: white;
-    font-size: 30px;
-    font-family: sans-serif;
+  color: white;
+  font-size: 30px;
+  font-family: sans-serif;
 }
 
 .current {
-    font-weight: bold;
-    color: orange;
+  font-weight: bold;
+  color: orange;
 }
 
 .toWin {
-    font-size: 1.5em;
-    color: #007b32;
-    font-weight: bold;
+  font-size: 1.5em;
+  color: #007b32;
+  font-weight: bold;
 }
